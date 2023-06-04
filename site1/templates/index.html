@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Магазин одежды "Стильная Муха"</title>
+    <style>
+        body {
+            text-align: center;
+            background-color: #f1f1f1;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            background: linear-gradient(to right, violet, indigo, blue, green, yellow, orange, red);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
+            font-size: 36px;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px;
+        }
+
+        .catalog {
+            width: 50%;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .cart {
+            width: 50%;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .product {
+            margin-bottom: 10px;
+        }
+
+        .payment-link {
+            margin-top: 20px;
+        }
+
+        .payment-link a {
+            display: inline-block;
+            background-color: #ff4081;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .payment-link a:hover {
+            background-color: #d81b60;
+        }
+
+        .cart-items {
+            margin-top: 10px;
+            list-style: none;
+            padding: 0;
+        }
+
+        .cart-items li {
+            margin-bottom: 5px;
+        }
+
+        .cart-items li:last-child {
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Магазин одежды "С<span style="font-weight: normal;">тильная Муха"</span></h1>
+
+    <div class="container">
+        <div class="catalog">
+            <h2>Продукты</h2>
+            {% for product in products %}
+                <div class="product">
+                    <p>{{ product[1] }} - {{ product[2] }}₽</p>
+                    <form action="/add_to_cart" method="POST">
+                        <input type="hidden" name="product_id" value="{{ product[0] }}">
+                        <input type="number" name="quantity" value="1" min="1">
+                        <button type="submit">Добавить в корзину</button>
+                    </form>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="cart">
+            <h2>Корзина</h2>
+            <ul class="cart-items">
+                {% for item in cart_items %}
+                    <li>{{ item[1] }} - {{ item[2] }}₽ x {{ item[3] }} = {{ "%.2f"|format(item[4]) }}₽</li>
+                    <form action="/remove_from_cart/{{ item[0] }}" method="POST">
+                        <button type="submit">Удалить из корзины</button>
+                    </form>
+                {% endfor %}
+            </ul>
+            <p>Итоговая сумма: {{ "%.2f"|format(total_sum) }}₽</p>
+        </div>
+    </div>
+
+    <div class="payment-link">
+        <h2><a href="{{ url_for('checkout') }}">Перейти к оплате</a></h2>
+    </div>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+</body>
+</html>
+
+
+

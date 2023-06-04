@@ -1,0 +1,52 @@
+h1, h2 {
+    text-align: center;
+}
+
+.products {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.product {
+    width: 250px;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+.product-image {
+    margin-bottom: 10px;
+}
+
+.product-info {
+    margin-bottom: 10px;
+}
+
+.product-rating {
+    font-weight: bold;
+}
+
+.cart {
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+}
+
+th, td {
+    padding: 5px;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+}
+
+.remove-button {
+    cursor: pointer;
+}
+
+.star {
+    font-weight: bold;
+    color: gold;
+}

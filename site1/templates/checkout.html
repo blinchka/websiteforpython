@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Оформление заказа</title>
+    <style>
+        body {
+            text-align: center;
+            background-color: #f1f1f1;
+            font-family: Arial, sans-serif;
+        }
+
+        .checkout {
+            width: 50%;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .checkout h1 {
+            background: linear-gradient(to right, violet, indigo, blue, green, yellow, orange, red);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .order-details {
+            margin-bottom: 20px;
+        }
+
+        .order-details h2 {
+            margin-bottom: 10px;
+        }
+
+        .order-details p {
+            margin-bottom: 5px;
+        }
+
+        .total-price {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .input-field {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .input-field label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .input-field input {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .submit-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="checkout">
+        <h1>Оформление заказа</h1>
+
+        <form action="/payment" method="POST">
+            <div class="input-field">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="input-field">
+                <label for="name">Имя:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+
+            <div class="input-field">
+                <label for="address">Адрес:</label>
+                <input type="text" id="address" name="address" required>
+            </div>
+
+            <button type="submit" class="submit-button">Перейти к оплате</button>
+        </form>
+
+        <p class="total-price">Общая стоимость: {{ "%.2f"|format(total_sum) }} руб.</p>
+    </div>
+</body>
+</html>
+
+
